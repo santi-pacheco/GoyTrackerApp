@@ -9,6 +9,8 @@ import ActiveSession from '@/routes/workout/ActiveSession';
 import Library from '@/routes/library/Library';
 import CalendarView from '@/routes/history/CalendarView';
 import SessionDetail from '@/routes/history/SessionDetail';
+import Leaderboard from '@/routes/leaderboard/Leaderboard';
+import Compare from '@/routes/leaderboard/Compare';
 import Dashboard from '@/routes/analytics/Dashboard';
 import Profile from '@/routes/settings/Profile';
 
@@ -32,6 +34,8 @@ export default function App() {
           <Route path="/history" element={<CalendarView />} />
           <Route path="/history/:id" element={<SessionDetail />} />
           <Route path="/analytics" element={<Dashboard />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/leaderboard/:userId" element={<Compare />} />
           <Route path="/settings" element={<Profile />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,8 +1,10 @@
-import { useAuth, signOut } from '@/hooks/useAuth';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
-import { LogOut, Cloud, CloudOff, RefreshCw } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { useSyncStore } from '@/stores/syncStore';
 import { cn } from '@/lib/utils';
+import { Cloud, CloudOff, RefreshCw } from 'lucide-react';
 
 export function TopBar() {
   const { user } = useAuth();
@@ -17,8 +19,10 @@ export function TopBar() {
         <div className="flex items-center gap-2">
           <SyncBadge online={online} pending={pending} syncing={syncing} />
           {user && (
-            <Button variant="ghost" size="icon" onClick={() => void signOut()} title="Cerrar sesión">
-              <LogOut className="h-4 w-4" />
+            <Button asChild variant="ghost" size="icon" title="Ajustes">
+              <Link to="/settings">
+                <Settings className="h-4 w-4" />
+              </Link>
             </Button>
           )}
         </div>

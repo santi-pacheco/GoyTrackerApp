@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Dumbbell, BookOpen, Calendar, LineChart, Settings } from 'lucide-react';
+import { Dumbbell, BookOpen, Calendar, LineChart, Trophy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const items = [
@@ -7,7 +7,7 @@ const items = [
   { to: '/library', icon: BookOpen, label: 'Library' },
   { to: '/history', icon: Calendar, label: 'History' },
   { to: '/analytics', icon: LineChart, label: 'Analytics' },
-  { to: '/settings', icon: Settings, label: 'Settings' },
+  { to: '/leaderboard', icon: Trophy, label: 'Compete' },
 ];
 
 export function BottomNav() {

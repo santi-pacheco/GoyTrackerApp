@@ -242,7 +242,56 @@ export type Database = {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      leaderboard_volume: {
+        Args: { period_days?: number };
+        Returns: Array<{
+          user_id: string;
+          display_name: string;
+          total_volume_kg: number;
+          session_count: number;
+        }>;
+      };
+      leaderboard_frequency: {
+        Args: { period_days?: number };
+        Returns: Array<{
+          user_id: string;
+          display_name: string;
+          training_days: number;
+          session_count: number;
+          total_sets: number;
+        }>;
+      };
+      leaderboard_pr_by_exercise: {
+        Args: { p_exercise_id: string };
+        Returns: Array<{
+          user_id: string;
+          display_name: string;
+          best_1rm_kg: number;
+          best_weight_kg: number;
+          best_reps: number;
+        }>;
+      };
+      user_stats: {
+        Args: { p_user_id: string; period_days?: number };
+        Returns: Array<{
+          user_id: string;
+          display_name: string;
+          total_volume_kg: number;
+          session_count: number;
+          total_sets: number;
+          training_days: number;
+          avg_volume_per_session: number;
+        }>;
+      };
+      user_weekly_volume: {
+        Args: { p_user_id: string; weeks?: number };
+        Returns: Array<{
+          week_start: string;
+          total_volume_kg: number;
+        }>;
+      };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };
