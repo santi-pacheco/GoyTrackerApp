@@ -79,6 +79,61 @@ Tras deploy:
 
 > Los iconos PWA están en SVG (`public/icons/icon.svg`) — funcionan en Chromium-based browsers. Para máxima compatibilidad iOS Safari, reemplaza por PNGs 192x192 y 512x512 y actualiza `vite.config.ts`.
 
+## Android (Capacitor)
+
+App empaquetada como APK Android usando [Capacitor](https://capacitorjs.com/). Reusa exactamente el mismo bundle de Vite — sin reescribir UI.
+
+### Requisitos
+
+- JDK 17 o 21 (`java --version`)
+- [Android Studio](https://developer.android.com/studio) — instala SDK + emulator + build tools
+
+### Workflow
+
+Cada vez que cambies el código web:
+
+```bash
+npm run build           # compila Vite → dist/
+npx cap sync android    # copia dist/ a android/app/src/main/assets/public/
+```
+
+### Generar APK
+
+Opción A — Android Studio (recomendado primera vez):
+
+```bash
+npx cap open android    # abre proyecto en Studio
+```
+
+En Studio: **Build → Build Bundle(s) / APK(s) → Build APK(s)**. Output en `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+Opción B — CLI (si tienes SDK + gradle configurados):
+
+```bash
+cd android
+./gradlew assembleDebug
+```
+
+### Instalar en teléfono
+
+1. Activa **Opciones de desarrollador → Depuración USB** en el móvil.
+2. Conecta por USB.
+3. Desde Studio: botón Run ▶ con tu device seleccionado.
+4. O instala APK manual: `adb install android/app/build/outputs/apk/debug/app-debug.apk`.
+
+### App ID y nombre
+
+Configurados en `capacitor.config.ts`:
+- `appId`: `com.santipacheco.goytracker`
+- `appName`: `GoyTracker`
+
+Cambia ambos antes de release a Play Store.
+
+### Limitaciones del MVP nativo
+
+- Notificaciones de rest timer usan Notification API del WebView (puede no funcionar en background). Para notificaciones nativas reales instala `@capacitor/local-notifications`.
+- Sin acceso a background sync nativo. La queue de Dexie sincroniza solo cuando la app está en foreground.
+
 ## Features (MVP)
 
 - ✅ Auth (Supabase email + password)
